@@ -1,31 +1,100 @@
 import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
 import BrandMark from '../components/BrandMark';
+import Seo from '../components/Seo';
+import JsonLd from '../components/JsonLd';
 import { images } from '../lib/images';
 import { SITE } from '../lib/site';
-import { usePageMeta } from '../lib/usePageMeta';
+import {
+  webPageSchema,
+  faqPageSchema,
+  reviewListSchema,
+  serviceListSchema,
+} from '../lib/schema';
+
+const HOME_FAQS = [
+  {
+    question: 'Do you offer a free consultation?',
+    answer:
+      "Yes. The initial consultation is free, confidential and carries no obligation. We're available 24/7 — call (703) 844-4519 anytime.",
+  },
+  {
+    question: 'Do you handle cases on contingency?',
+    answer:
+      'Yes. Personal injury matters are handled on a contingency basis — you pay nothing unless I win your case. Other matters use flat or hourly rates, disclosed in writing before we begin.',
+  },
+  {
+    question: 'What areas do you practice in?',
+    answer:
+      'Personal injury (including motor-vehicle accidents, slip-and-fall and premises liability, and wrongful death), criminal defense, divorce and family law, and civil litigation.',
+  },
+  {
+    question: 'Which jurisdictions do you cover?',
+    answer:
+      "Clients throughout Northern Virginia — Fairfax, Arlington, Loudoun, Prince William and Fauquier counties — and Maryland's Howard, Montgomery and Prince George's counties. I also appear in federal courts in the Eastern District of Virginia.",
+  },
+  {
+    question: 'Will I work directly with Bhavik?',
+    answer:
+      "Yes. Unlike many firms that delegate client interaction to paralegals or administrative staff, you'll work directly with Bhavik on the substantive aspects of your case — including updates, questions and strategy.",
+  },
+];
+
+const HOME_REVIEWS = [
+  {
+    body:
+      'From the very beginning, the service provided was the very best. They were easily accessible, got back to me quickly, aggressive and got me the results that I wanted — they will make you rest easy in the knowledge you are represented by the best in the area.',
+    authorName: 'Verified Client',
+    rating: 5,
+    reviewLocation: 'Northern Virginia',
+  },
+  {
+    body:
+      'Mr. Patel is a superb attorney. He was attentive, extremely knowledgeable and provided me with outstanding legal guidance when I needed it. I always felt that my needs were met and that he was personally invested in me and my case.',
+    authorName: 'Verified Client',
+    rating: 5,
+    reviewLocation: 'Fairfax, VA',
+  },
+];
+
+const HOME_SERVICES = [
+  { name: 'Personal Injury', description: 'Securing fair compensation for victims of negligence — from auto collisions to slip-and-fall and beyond.', path: '/practice#personal-injury' },
+  { name: 'Criminal Defense', description: 'Strategic, discreet defense across Northern Virginia for misdemeanors and felonies.', path: '/practice#criminal-defense' },
+  { name: 'Divorce & Family Law', description: 'Compassionate, decisive guidance through separation, custody and property division.', path: '/practice#family-law' },
+  { name: 'Civil Litigation', description: 'Effective representation in contract, property and commercial disputes.', path: '/practice#civil-litigation' },
+];
 
 export default function Home() {
-  usePageMeta({
-    title: `${SITE.firmName}, Esq. | Northern Virginia Personal Injury Attorney`,
-    description:
-      `${SITE.firmName}, Esq. — Fairfax, VA attorney handling personal injury, criminal defense, family law and civil litigation across Northern Virginia and Maryland. Free consultations, available 24/7.`,
-  });
-
   return (
     <>
+      <Seo />
+      <JsonLd
+        id="home-webpage"
+        data={webPageSchema({
+          path: '/',
+          title: `${SITE.firmName}, Esq. | Fairfax Personal Injury & Criminal Defense Attorney`,
+          description:
+            `Fairfax, VA attorney ${SITE.firmName}, Esq. — 20+ years handling personal injury, car accidents, criminal defense, family law and civil litigation across Northern Virginia and Maryland.`,
+        })}
+      />
+      <JsonLd id="home-faq" data={faqPageSchema(HOME_FAQS)} />
+      <JsonLd id="home-reviews" data={reviewListSchema(HOME_REVIEWS)} />
+      <JsonLd id="home-services" data={serviceListSchema(HOME_SERVICES)} />
+
       {/* Hero */}
-      <section className="hero">
+      <section className="hero" aria-labelledby="home-hero-heading">
         <div className="container-x">
           <div className="hero-grid">
             <Reveal className="hero-copy">
               <p className="eyebrow">{SITE.firmName}, {SITE.firmTag} · {SITE.city}</p>
-              <h1>
-                Here for you when <span className="accent">the unexpected</span> happens.
+              <h1 id="home-hero-heading">
+                Fairfax Personal Injury &amp; Criminal Defense Attorney —{' '}
+                <span className="accent">here when the unexpected happens</span>.
               </h1>
               <p className="hero-lead">
                 Focused, client-first representation in personal injury, criminal defense, family
-                law and civil litigation — for clients across Northern Virginia and Maryland.
+                law and civil litigation — serving Fairfax, Arlington, Loudoun and all of Northern
+                Virginia &amp; Maryland.
               </p>
               <div className="hero-actions">
                 <Link className="btn btn--gold btn--lg" to="/contact">
@@ -47,7 +116,15 @@ export default function Home() {
 
             <Reveal className="hero-visual">
               <div className="hero-portrait">
-                <img src={images.attorney.portrait} alt={`Attorney ${SITE.firmName}, Esq.`} loading="eager" />
+                <img
+                  src={images.attorney.portrait}
+                  alt={`Portrait of ${SITE.firmName}, Esq., a Fairfax personal injury and criminal defense attorney`}
+                  width={1321}
+                  height={1981}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
               </div>
               <div className="hero-badge hero-badge--accent">
                 <div className="hero-badge-icon" aria-hidden="true">

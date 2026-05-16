@@ -1,29 +1,38 @@
 import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
+import Seo from '../components/Seo';
+import JsonLd from '../components/JsonLd';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { images } from '../lib/images';
 import { SITE } from '../lib/site';
-import { usePageMeta } from '../lib/usePageMeta';
+import { webPageSchema } from '../lib/schema';
 
 export default function About() {
-  usePageMeta({
-    title: `About | ${SITE.firmName}, Esq. — Fairfax, VA Attorney`,
-    description:
-      `${SITE.firmName}, Esq. — a Fairfax, VA attorney practicing personal injury, criminal defense, family law and civil litigation across Northern Virginia and Maryland.`,
-  });
-
   return (
     <>
-      <section className="hero hero--sub">
+      <Seo />
+      <JsonLd
+        id="about-webpage"
+        data={webPageSchema({
+          path: '/about',
+          title: `About ${SITE.firmName}, Esq. | Fairfax, VA Trial Attorney`,
+          description: `Meet ${SITE.firmName}, Esq. — a Fairfax-based trial attorney with two decades of experience across personal injury, criminal defense, family law and civil litigation.`,
+          type: 'AboutPage',
+        })}
+      />
+
+      <section className="hero hero--sub" aria-labelledby="about-hero-heading">
         <div className="container-x">
           <div className="hero-grid">
             <Reveal className="hero-copy">
-              <nav className="breadcrumbs" aria-label="Breadcrumb">
-                <Link to="/">Home</Link>
-                <span className="sep" aria-hidden="true">/</span>
-                <span aria-current="page">About</span>
-              </nav>
+              <Breadcrumbs
+                items={[
+                  { label: 'Home', to: '/' },
+                  { label: 'About' },
+                ]}
+              />
               <p className="eyebrow">Attorney Profile · {SITE.city}</p>
-              <h1>
+              <h1 id="about-hero-heading">
                 Meet <span className="accent">{SITE.firmName}, Esq.</span>
               </h1>
               <p className="hero-lead">
@@ -40,7 +49,14 @@ export default function About() {
         <div className="container-x">
           <Reveal className="split">
             <div className="split-media">
-              <img src={images.attorney.portrait} alt={`Portrait of attorney ${SITE.firmName}`} />
+              <img
+                src={images.attorney.portrait}
+                alt={`Professional portrait of ${SITE.firmName}, Esq., a Fairfax, VA attorney`}
+                width={1321}
+                height={1981}
+                loading="lazy"
+                decoding="async"
+              />
               <span className="split-media-frame" aria-hidden="true" />
               <div className="split-media-badge">
                 <span className="num">★★★★★</span>

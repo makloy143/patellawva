@@ -1,7 +1,14 @@
 import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
+import Seo from '../components/Seo';
+import JsonLd from '../components/JsonLd';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { SITE } from '../lib/site';
-import { usePageMeta } from '../lib/usePageMeta';
+import {
+  webPageSchema,
+  caseResultsItemListSchema,
+  reviewListSchema,
+} from '../lib/schema';
 
 type Item = { amount: string; desc: string; tag: string };
 
@@ -27,26 +34,48 @@ function ResultAmount({ value }: { value: string }) {
   return <div className="result-amount">{value}</div>;
 }
 
-export default function Results() {
-  usePageMeta({
-    title: `Case Results | ${SITE.firmName}, Esq. — ${SITE.city}`,
-    description:
-      `Representative settlements and verdicts from cases handled by ${SITE.firmName} — personal injury, criminal defense, family law and civil litigation across Northern Virginia.`,
-  });
+const RESULTS_REVIEWS = [
+  { body: 'From the very beginning, the service provided was the very best. They were easily accessible, got back to me quickly, aggressive and got me the results that I wanted. They maintained constant communication and assistance from the consultation all the way to the resolution.', authorName: 'Verified Client', rating: 5, reviewLocation: 'Fairfax, VA' },
+  { body: 'Mr. Patel is a superb attorney. He was attentive, extremely knowledgeable and provided me with outstanding legal guidance when I needed it. I always felt that my needs were met and that he was personally invested in me and my case.', authorName: 'Verified Client', rating: 5, reviewLocation: 'Northern Virginia' },
+];
 
+export default function Results() {
   return (
     <>
-      <section className="hero hero--sub">
+      <Seo />
+      <JsonLd
+        id="results-webpage"
+        data={webPageSchema({
+          path: '/results',
+          title: `Case Results | ${SITE.firmName}, Esq. — Fairfax Settlement & Verdict Attorney`,
+          description: `Representative settlements and verdicts personally handled by ${SITE.firmName} — six-figure personal injury recoveries and criminal case dismissals across Northern Virginia.`,
+          type: 'CollectionPage',
+        })}
+      />
+      <JsonLd
+        id="results-itemlist"
+        data={caseResultsItemListSchema(
+          RESULTS.map((r) => ({
+            amount: r.amount,
+            description: r.desc,
+            category: r.tag,
+          })),
+        )}
+      />
+      <JsonLd id="results-reviews" data={reviewListSchema(RESULTS_REVIEWS)} />
+
+      <section className="hero hero--sub" aria-labelledby="results-hero-heading">
         <div className="container-x">
           <div className="hero-grid">
             <Reveal className="hero-copy">
-              <nav className="breadcrumbs" aria-label="Breadcrumb">
-                <Link to="/">Home</Link>
-                <span className="sep" aria-hidden="true">/</span>
-                <span aria-current="page">Results</span>
-              </nav>
+              <Breadcrumbs
+                items={[
+                  { label: 'Home', to: '/' },
+                  { label: 'Results' },
+                ]}
+              />
               <p className="eyebrow">Case Results · {SITE.city}</p>
-              <h1>
+              <h1 id="results-hero-heading">
                 Proven outcomes for <span className="accent">real people</span> across Northern Virginia.
               </h1>
               <p className="hero-lead">

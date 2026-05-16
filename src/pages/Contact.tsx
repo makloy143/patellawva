@@ -1,16 +1,12 @@
 import { type FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
+import Seo from '../components/Seo';
+import JsonLd from '../components/JsonLd';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { SITE } from '../lib/site';
-import { usePageMeta } from '../lib/usePageMeta';
+import { webPageSchema } from '../lib/schema';
 
 export default function Contact() {
-  usePageMeta({
-    title: `Contact | ${SITE.firmName}, Esq. — Fairfax, VA Attorney`,
-    description:
-      `Contact ${SITE.firmName}, Esq. for a free, confidential consultation — available 24/7. Located at ${SITE.address}. ${SITE.phoneDisplay}.`,
-  });
-
   const [showSuccess, setShowSuccess] = useState(false);
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -24,17 +20,29 @@ export default function Contact() {
 
   return (
     <>
-      <section className="hero hero--sub">
+      <Seo />
+      <JsonLd
+        id="contact-webpage"
+        data={webPageSchema({
+          path: '/contact',
+          title: `Contact ${SITE.firmName}, Esq. | Free Consultation · ${SITE.availability}`,
+          description: `Contact ${SITE.firmName}, Esq. for a free, confidential consultation — available 24/7. Office at ${SITE.address}. Call ${SITE.phoneDisplay}.`,
+          type: 'ContactPage',
+        })}
+      />
+
+      <section className="hero hero--sub" aria-labelledby="contact-hero-heading">
         <div className="container-x">
           <div className="hero-grid">
             <Reveal className="hero-copy">
-              <nav className="breadcrumbs" aria-label="Breadcrumb">
-                <Link to="/">Home</Link>
-                <span className="sep" aria-hidden="true">/</span>
-                <span aria-current="page">Contact</span>
-              </nav>
+              <Breadcrumbs
+                items={[
+                  { label: 'Home', to: '/' },
+                  { label: 'Contact' },
+                ]}
+              />
               <p className="eyebrow">Free Consultation · {SITE.availability}</p>
-              <h1>
+              <h1 id="contact-hero-heading">
                 Tell us what happened — <span className="accent">we&apos;ll take it from there</span>.
               </h1>
               <p className="hero-lead">

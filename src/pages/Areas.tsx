@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
+import Seo from '../components/Seo';
+import JsonLd from '../components/JsonLd';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { SITE } from '../lib/site';
-import { usePageMeta } from '../lib/usePageMeta';
+import { webPageSchema } from '../lib/schema';
 
 const VA_COUNTIES: Array<{ name: string; cities: string[] }> = [
   { name: 'Fairfax County', cities: ['Alexandria', 'Annandale', 'Centreville', 'Chantilly', 'Fairfax', 'Herndon', 'McLean', 'Reston', 'Springfield', 'Tysons Corner', 'Vienna'] },
@@ -18,25 +21,31 @@ const MD_COUNTIES: Array<{ name: string; cities: string[] }> = [
 ];
 
 export default function Areas() {
-  usePageMeta({
-    title: `Areas Served | ${SITE.firmName}, Esq. — Fairfax, VA Attorney`,
-    description:
-      `${SITE.firmName}, Esq. represents clients throughout Northern Virginia and Maryland — including Fairfax, Arlington, Loudoun, Prince William, Fauquier, Howard, Montgomery and Prince George's counties.`,
-  });
-
   return (
     <>
-      <section className="hero hero--sub">
+      <Seo />
+      <JsonLd
+        id="areas-webpage"
+        data={webPageSchema({
+          path: '/areas',
+          title: `Areas Served | Fairfax, Northern Virginia & Maryland Attorney`,
+          description: `${SITE.firmName}, Esq. represents clients across Fairfax, Arlington, Loudoun, Prince William, Fauquier, Howard, Montgomery and Prince George's counties.`,
+          type: 'CollectionPage',
+        })}
+      />
+
+      <section className="hero hero--sub" aria-labelledby="areas-hero-heading">
         <div className="container-x">
           <div className="hero-grid">
             <Reveal className="hero-copy">
-              <nav className="breadcrumbs" aria-label="Breadcrumb">
-                <Link to="/">Home</Link>
-                <span className="sep" aria-hidden="true">/</span>
-                <span aria-current="page">Areas Served</span>
-              </nav>
+              <Breadcrumbs
+                items={[
+                  { label: 'Home', to: '/' },
+                  { label: 'Areas Served' },
+                ]}
+              />
               <p className="eyebrow">Areas Served · {SITE.city}</p>
-              <h1>
+              <h1 id="areas-hero-heading">
                 Representing clients across <span className="accent">Northern Virginia &amp; Maryland</span>.
               </h1>
               <p className="hero-lead">

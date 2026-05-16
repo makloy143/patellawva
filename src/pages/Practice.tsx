@@ -1,30 +1,57 @@
 import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
+import Seo from '../components/Seo';
+import JsonLd from '../components/JsonLd';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { images } from '../lib/images';
 import { SITE } from '../lib/site';
-import { usePageMeta } from '../lib/usePageMeta';
+import { webPageSchema, faqPageSchema, serviceListSchema } from '../lib/schema';
+
+const PRACTICE_FAQS = [
+  { question: 'How quickly will I hear back after reaching out?', answer: "Our office is available 24/7. You'll typically hear back within a few hours, and urgent matters are responded to immediately." },
+  { question: 'What should I bring to a first meeting?', answer: "Anything you have — police reports, photos, medical records, contracts, correspondence, insurance information. If you have nothing on hand, that's fine; we'll work from your account of events." },
+  { question: 'How are legal fees structured?', answer: 'Personal injury matters are handled on a contingency basis — no fee unless I win your case. Other matters use flat or hourly rates, fully disclosed in writing before we begin.' },
+  { question: 'Will Bhavik personally handle my case?', answer: 'Yes. Unlike many firms that delegate client interaction to paralegals or administrative staff, your attorney is directly accessible to you on the substantive aspects of your matter.' },
+  { question: 'Which jurisdictions do you cover?', answer: "Clients throughout Northern Virginia — Fairfax, Arlington, Loudoun, Prince William and Fauquier counties — and Maryland's Howard, Montgomery and Prince George's counties." },
+];
+
+const PRACTICE_SERVICES = [
+  { name: 'Personal Injury Lawyer', description: 'Car accidents, truck accidents, motorcycle and pedestrian collisions, slip-and-fall and premises liability, wrongful death and catastrophic injury.', path: '/practice#personal-injury' },
+  { name: 'Criminal Defense Attorney', description: 'DUI, reckless driving, assault, theft and drug offenses — pretrial motions through jury trial in Virginia state and federal courts.', path: '/practice#criminal-defense' },
+  { name: 'Divorce & Family Law Attorney', description: 'Contested and uncontested divorce, child custody, visitation and support, equitable distribution and post-decree modifications.', path: '/practice#family-law' },
+  { name: 'Civil Litigation Attorney', description: 'Breach of contract, commercial loan disputes, real estate and property claims — trial-ready preparation, often resolved at settlement.', path: '/practice#civil-litigation' },
+];
 
 export default function Practice() {
-  usePageMeta({
-    title: `Practice Areas | ${SITE.firmName}, Fairfax Attorney`,
-    description:
-      `Practice areas of ${SITE.firmName}, Esq. — personal injury, criminal defense, divorce and family law, and civil litigation across Northern Virginia and Maryland.`,
-  });
-
   return (
     <>
-      <section className="hero hero--sub">
+      <Seo />
+      <JsonLd
+        id="practice-webpage"
+        data={webPageSchema({
+          path: '/practice',
+          title: 'Practice Areas | Fairfax Personal Injury, Criminal Defense & Family Law Attorney',
+          description: `Practice areas of ${SITE.firmName}, Esq. — personal injury, criminal defense, divorce and family law, and civil litigation across Northern Virginia and Maryland.`,
+          type: 'CollectionPage',
+        })}
+      />
+      <JsonLd id="practice-services" data={serviceListSchema(PRACTICE_SERVICES)} />
+      <JsonLd id="practice-faq" data={faqPageSchema(PRACTICE_FAQS)} />
+
+      <section className="hero hero--sub" aria-labelledby="practice-hero-heading">
         <div className="container-x">
           <div className="hero-grid">
             <Reveal className="hero-copy">
-              <nav className="breadcrumbs" aria-label="Breadcrumb">
-                <Link to="/">Home</Link>
-                <span className="sep" aria-hidden="true">/</span>
-                <span aria-current="page">Practice Areas</span>
-              </nav>
+              <Breadcrumbs
+                items={[
+                  { label: 'Home', to: '/' },
+                  { label: 'Practice Areas' },
+                ]}
+              />
               <p className="eyebrow">Areas of Practice</p>
-              <h1>
-                Focused legal experience across <span className="accent">four core areas</span>.
+              <h1 id="practice-hero-heading">
+                Focused legal experience across{' '}
+                <span className="accent">four core areas</span>.
               </h1>
               <p className="hero-lead">
                 Bhavik Patel concentrates his practice on the matters that most often shape lives
@@ -102,7 +129,14 @@ export default function Practice() {
               </Link>
             </div>
             <div className="split-media">
-              <img src={images.practice.personalInjury} alt="Attorney consultation in a private office" />
+              <img
+                src={images.practice.personalInjury}
+                alt="Fairfax personal injury attorney consultation in a private law office"
+                width={1200}
+                height={1500}
+                loading="lazy"
+                decoding="async"
+              />
               <span className="split-media-frame" aria-hidden="true" />
             </div>
           </Reveal>
@@ -114,7 +148,14 @@ export default function Practice() {
         <div className="container-x">
           <Reveal className="split">
             <div className="split-media">
-              <img src={images.practice.criminalDefense} alt="Courthouse exterior with classical architecture" />
+              <img
+                src={images.practice.criminalDefense}
+                alt="Northern Virginia courthouse exterior — criminal defense practice area"
+                width={1200}
+                height={1500}
+                loading="lazy"
+                decoding="async"
+              />
               <span className="split-media-frame" aria-hidden="true" />
             </div>
             <div>
@@ -166,7 +207,14 @@ export default function Practice() {
               </Link>
             </div>
             <div className="split-media">
-              <img src={images.practice.familyLaw} alt="Private consultation between attorney and client" />
+              <img
+                src={images.practice.familyLaw}
+                alt="Private consultation between a Fairfax family law attorney and a client"
+                width={1200}
+                height={1500}
+                loading="lazy"
+                decoding="async"
+              />
               <span className="split-media-frame" aria-hidden="true" />
             </div>
           </Reveal>
@@ -178,7 +226,14 @@ export default function Practice() {
         <div className="container-x">
           <Reveal className="split">
             <div className="split-media">
-              <img src={images.practice.civilLitigation} alt="Stacked legal volumes on a wooden desk" />
+              <img
+                src={images.practice.civilLitigation}
+                alt="Stacked legal volumes on a wooden desk — civil litigation practice"
+                width={1200}
+                height={1500}
+                loading="lazy"
+                decoding="async"
+              />
               <span className="split-media-frame" aria-hidden="true" />
             </div>
             <div>

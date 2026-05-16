@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Block crawler-specific traps if they appear in the future.
+Disallow: /api/
+Disallow: /admin/
+
+# Be polite — sitemap helps crawlers find every page quickly.
+Sitemap: https://www.patellawva.com/sitemap.xml

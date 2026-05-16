@@ -2,23 +2,176 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0a1b33" />
-    <title>Bhavik D. Patel, Esq. | Northern Virginia Personal Injury Attorney</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a1b33" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#07142b" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Crawler defaults; per-page <Seo> overrides these on navigation. -->
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="author" content="Bhavik D. Patel, Esq." />
+
+    <title>Bhavik D. Patel, Esq. | Fairfax Personal Injury & Criminal Defense Attorney</title>
     <meta
       name="description"
-      content="Bhavik D. Patel, Esq. — Fairfax, VA attorney handling personal injury, criminal defense, family law and civil litigation across Northern Virginia and Maryland. Free consultations, available 24/7."
+      content="Fairfax, VA attorney Bhavik D. Patel, Esq. — 20+ years handling personal injury, car accidents, criminal defense, family law and civil litigation across Northern Virginia and Maryland. Free consultation, no fee unless we win, available 24/7."
     />
+    <meta
+      name="keywords"
+      content="Fairfax personal injury lawyer, Northern Virginia personal injury attorney, Fairfax car accident attorney, Fairfax criminal defense lawyer, Fairfax DUI lawyer, Fairfax family law attorney, free legal consultation Fairfax"
+    />
+
+    <link rel="canonical" href="https://www.patellawva.com/" />
+    <link rel="alternate" hreflang="en-US" href="https://www.patellawva.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.patellawva.com/" />
+
+    <!-- Icons + PWA manifest -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/logo-mark.svg" />
+    <link rel="mask-icon" href="/logo-mark.svg" color="#0a1b33" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Bhavik D. Patel, Attorney at Law" />
+    <meta property="og:title" content="Bhavik D. Patel, Esq. | Fairfax Personal Injury & Criminal Defense Attorney" />
+    <meta property="og:description" content="20+ years of focused legal practice in Fairfax, VA. Free consultation. No fee unless we win your injury case." />
+    <meta property="og:url" content="https://www.patellawva.com/" />
+    <meta property="og:image" content="https://www.patellawva.com/og-default.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Bhavik D. Patel, Attorney at Law — Fairfax, VA" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Bhavik D. Patel, Esq. | Fairfax Personal Injury & Criminal Defense Attorney" />
+    <meta name="twitter:description" content="20+ years of focused legal practice in Fairfax, VA. Free consultation. No fee unless we win your injury case." />
+    <meta name="twitter:image" content="https://www.patellawva.com/og-default.svg" />
+
+    <!-- Geo / NAP signals for local SEO -->
+    <meta name="geo.region" content="US-VA" />
+    <meta name="geo.placename" content="Fairfax, Virginia" />
+    <meta name="geo.position" content="38.8462;-77.3064" />
+    <meta name="ICBM" content="38.8462, -77.3064" />
+
+    <!-- Performance: warm DNS / TCP for font origin + preload hero portrait -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      href="https://cdn.sanity.io/images/4nanwteg/production/25b5e4e9112eedb8a32550201e0bf1e83a495ad1-1321x1981.jpg?w=1321&q=100&fit=max&auto=format&dpr=2"
+      imagesrcset="https://cdn.sanity.io/images/4nanwteg/production/25b5e4e9112eedb8a32550201e0bf1e83a495ad1-1321x1981.jpg?w=720&q=80&auto=format 720w, https://cdn.sanity.io/images/4nanwteg/production/25b5e4e9112eedb8a32550201e0bf1e83a495ad1-1321x1981.jpg?w=1321&q=100&auto=format&dpr=2 1320w"
+      imagesizes="(max-width: 980px) 100vw, 50vw"
+    />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Site-wide structured data — referenced by per-page WebPage nodes. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.patellawva.com/#organization",
+          "name": "Bhavik D. Patel, Attorney at Law",
+          "url": "https://www.patellawva.com",
+          "logo": "https://www.patellawva.com/logo.svg",
+          "email": "contact@patellawva.com",
+          "telephone": "+17038444519",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "10500 Sager Ave, Suite F",
+            "addressLocality": "Fairfax",
+            "addressRegion": "VA",
+            "postalCode": "22030",
+            "addressCountry": "US"
+          }
+        },
+        {
+          "@type": ["LegalService", "LocalBusiness", "ProfessionalService"],
+          "@id": "https://www.patellawva.com/#place",
+          "name": "Bhavik D. Patel, Attorney at Law",
+          "image": "https://www.patellawva.com/logo.svg",
+          "url": "https://www.patellawva.com",
+          "telephone": "+17038444519",
+          "email": "contact@patellawva.com",
+          "priceRange": "$$",
+          "description": "Fairfax, VA law office handling personal injury, criminal defense, divorce and family law, and civil litigation. Free consultation, available 24/7.",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "10500 Sager Ave, Suite F",
+            "addressLocality": "Fairfax",
+            "addressRegion": "VA",
+            "postalCode": "22030",
+            "addressCountry": "US"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 38.8462,
+            "longitude": -77.3064
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+              "opens": "00:00",
+              "closes": "23:59"
+            }
+          ],
+          "areaServed": [
+            { "@type": "AdministrativeArea", "name": "Fairfax County, VA" },
+            { "@type": "AdministrativeArea", "name": "Arlington County, VA" },
+            { "@type": "AdministrativeArea", "name": "Loudoun County, VA" },
+            { "@type": "AdministrativeArea", "name": "Prince William County, VA" },
+            { "@type": "AdministrativeArea", "name": "Fauquier County, VA" },
+            { "@type": "AdministrativeArea", "name": "Montgomery County, MD" }
+          ],
+          "serviceType": [
+            "Personal Injury",
+            "Car Accidents",
+            "Criminal Defense",
+            "DUI Defense",
+            "Divorce and Family Law",
+            "Civil Litigation"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.patellawva.com/#website",
+          "url": "https://www.patellawva.com",
+          "name": "Bhavik D. Patel, Attorney at Law",
+          "publisher": { "@id": "https://www.patellawva.com/#organization" },
+          "inLanguage": "en-US"
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="padding:1rem;text-align:center;font-family:system-ui,sans-serif;">
+        This site requires JavaScript. Please call
+        <a href="tel:+17038444519">(703) 844-4519</a> for a free, confidential consultation.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

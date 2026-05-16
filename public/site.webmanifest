@@ -1,0 +1,16 @@
+{
+  "name": "Bhavik D. Patel, Attorney at Law",
+  "short_name": "Patel Law",
+  "description": "Fairfax, VA attorney handling personal injury, criminal defense, family law and civil litigation across Northern Virginia and Maryland.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fbf8f3",
+  "theme_color": "#0a1b33",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/logo-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "lang": "en-US",
+  "categories": ["legal", "professional", "business"]
+}
