@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 96" role="img" aria-labelledby="lt ld">
+  <title id="lt">Bhavik D. Patel — Attorney at Law</title>
+  <desc id="ld">Refined logotype combining monogram mark with name for Bhavik D. Patel.</desc>
+  <defs>
+    <linearGradient id="lgo-navy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1b33"/>
+      <stop offset="100%" stop-color="#1c3a6a"/>
+    </linearGradient>
+    <linearGradient id="lgo-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d5b27e"/>
+      <stop offset="100%" stop-color="#b8945f"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(12 16)">
+    <rect width="64" height="64" rx="14" fill="url(#lgo-navy)"/>
+    <path d="M19 17h12.5c5 0 8.5 3 8.5 7.4 0 3.1-1.7 5.4-4.4 6.4 3.4.8 5.4 3.4 5.4 6.9 0 4.7-3.6 7.8-9 7.8H19V17Zm5.4 4.6v7.6h6.6c2.6 0 4.4-1.5 4.4-3.8 0-2.3-1.8-3.8-4.4-3.8h-6.6Zm0 12v7.6h7.4c2.8 0 4.6-1.5 4.6-3.8 0-2.3-1.8-3.8-4.6-3.8h-7.4Z" fill="url(#lgo-gold)"/>
+    <path d="M14 50h36" stroke="url(#lgo-gold)" stroke-width="1.5" stroke-linecap="round" opacity="0.85"/>
+  </g>
+  <g transform="translate(96 42)" font-family="'Cormorant Garamond', Georgia, serif" fill="#0a1b33">
+    <text x="0" y="0" font-size="30" font-weight="600" letter-spacing="0.5">Bhavik D. Patel</text>
+    <text x="0" y="26" font-size="12" font-family="Inter, system-ui, sans-serif" font-weight="600" letter-spacing="3" fill="#b8945f" text-transform="uppercase">A T T O R N E Y &#160; A T &#160; L A W</text>
+  </g>
+</svg>
