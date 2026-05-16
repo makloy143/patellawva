@@ -11,34 +11,49 @@ injury, criminal defense, divorce & family law, and civil litigation.
 
 ## Tech stack
 
-- **[Vite](https://vitejs.dev/)** — multi-page bundler and dev server.
-- **Vanilla HTML / CSS / JS** — no framework, no runtime dependencies.
-- A custom design system in `src/style.css` (CSS custom properties, fluid
-  type, responsive grid).
-- A small JS layer in `src/` that mounts the shared header/footer, handles
-  scroll reveals, the contact form, and a centralized image store.
+- **[React 19](https://react.dev/)** with TypeScript
+- **[Vite 6](https://vitejs.dev/)** — dev server and bundler
+- **[Tailwind CSS v4](https://tailwindcss.com/)** — design tokens via `@theme`
+- **[React Router v7](https://reactrouter.com/)** — client-side routing
+- A small custom design layer in `src/index.css` (navy/gold typography
+  system, custom utility classes, reveal animations)
 
 ## Project structure
 
 ```
 .
-├── index.html          # Home
-├── practice.html       # Practice areas (4 sections)
-├── about.html          # Attorney profile
-├── results.html        # Representative case results
-├── areas.html          # Geographic areas served
-├── contact.html        # Contact form + office info
+├── index.html               # SPA shell (mounts React)
 ├── public/
 │   ├── favicon.svg
 │   ├── logo.svg
 │   ├── logo-mark.svg
-│   └── images/         # Drop local image files here (see images.js)
+│   └── images/              # Drop local image files here (see lib/images.ts)
 ├── src/
-│   ├── main.js         # Page bootstrap (binders, header/footer mount)
-│   ├── components.js   # Header/footer markup + nav constants
-│   ├── images.js       # Centralized image store (data-image="key.path")
-│   └── style.css       # Design system + page styles
-└── vite.config.js
+│   ├── main.tsx             # React + Router bootstrap
+│   ├── App.tsx              # Routes
+│   ├── index.css            # Tailwind v4 + theme + component styles
+│   ├── components/
+│   │   ├── Layout.tsx       # Site shell (Header + <Outlet/> + Footer)
+│   │   ├── Header.tsx       # Top bar, brand, nav, mobile drawer
+│   │   ├── Footer.tsx       # Footer with nav, practice, contact
+│   │   ├── BrandMark.tsx    # Reusable logo glyph
+│   │   └── Reveal.tsx       # Scroll-reveal wrapper (IntersectionObserver)
+│   ├── lib/
+│   │   ├── site.ts          # Brand + nav constants
+│   │   ├── images.ts        # Centralized image store
+│   │   └── usePageMeta.ts   # Per-page <title> / <meta description>
+│   └── pages/
+│       ├── Home.tsx
+│       ├── Practice.tsx
+│       ├── About.tsx
+│       ├── Results.tsx
+│       ├── Areas.tsx
+│       ├── Contact.tsx
+│       └── NotFound.tsx
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+└── vite.config.ts
 ```
 
 ## Getting started
@@ -59,19 +74,24 @@ npm run build      # outputs to dist/
 npm run preview    # serve the built site locally
 ```
 
+> `npm run build` runs `tsc -b && vite build` — the TypeScript compiler
+> validates types before Vite bundles, so type errors fail the build.
+
 ## Image store
 
-Every image used on the site is registered in [`src/images.js`](src/images.js)
-and referenced from HTML via `data-image="key.path"`:
+Every image used on the site is registered in
+[`src/lib/images.ts`](src/lib/images.ts) and imported directly into pages:
 
-```html
-<img data-image="attorney.portrait" alt="Bhavik D. Patel, Esq." />
+```tsx
+import { images } from '@/lib/images';
+
+<img src={images.attorney.portrait} alt="Bhavik D. Patel, Esq." />;
 ```
 
 To swap an image, drop the file into `public/images/` and update one line
-in `src/images.js` — every page that references the key picks it up
-automatically. See [`public/images/README.md`](public/images/README.md) for
-the full workflow.
+in `src/lib/images.ts` — every component that references the key picks it
+up automatically. See [`public/images/README.md`](public/images/README.md)
+for the full workflow.
 
 ## Practice areas
 
