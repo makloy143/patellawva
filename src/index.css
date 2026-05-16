@@ -118,7 +118,8 @@
     left: 0;
     top: 0;
     transform: translateY(-120%);
-    z-index: 100;
+    /* Above sticky header (see .site-header) so focus order stays usable. */
+    z-index: 1100;
     background: var(--color-navy-900);
     color: var(--color-ivory);
     padding: 0.75rem 1.1rem;
@@ -274,9 +275,13 @@
 .top-bar-tel:hover { color: var(--color-ivory); }
 
 .site-header {
-  position: sticky; top: 0; z-index: 50;
+  /* High enough that main-content layers (cards, .reveal, etc.) never paint
+     over the bar on scroll — `main` comes after <header> in the DOM, so
+     without this the hamburger can disappear under section content on mobile. */
+  position: sticky; top: 0; z-index: 1000;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
   border-bottom: 1px solid transparent;
   transition: box-shadow 220ms ease, border-color 220ms ease, background 220ms ease;
 }
@@ -314,7 +319,11 @@
 .nav a:hover, .nav a.is-active { color: var(--color-navy-900); }
 .nav a:hover::after, .nav a.is-active::after { transform: scaleX(1); }
 
-.header-actions { display: flex; align-items: center; gap: 1rem; }
+.header-actions {
+  display: flex; align-items: center; gap: 1rem;
+  /* Never let the brand column flex-shrink the hamburger off-screen. */
+  flex-shrink: 0;
+}
 .header-tel {
   display: inline-flex; align-items: center; gap: 0.5rem;
   font-weight: 600; font-size: 0.95rem; color: var(--color-navy-900);
@@ -325,6 +334,7 @@
   display: none;
   width: 44px; height: 44px; border-radius: 12px;
   align-items: center; justify-content: center;
+  flex-shrink: 0;
   background: var(--color-navy-900); color: var(--color-ivory);
 }
 .nav-toggle .icon-close { display: none; }
@@ -338,8 +348,8 @@
   display: flex; flex-direction: column; gap: 1rem;
   transform: translateY(-12px); opacity: 0; pointer-events: none;
   transition: transform 280ms ease, opacity 280ms ease;
-  /* Must overlay sticky .site-header (z-index: 50). */
-  z-index: 60;
+  /* Below .site-header (z-index: 1000); drawer does not cover the bar (inset-top). */
+  z-index: 900;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   /* Account for browser address bars / iOS safe area. */
@@ -361,12 +371,53 @@
   .nav, .header-tel, .header-cta { display: none !important; }
   .nav-toggle { display: inline-flex; }
   .header-inner { height: 64px; gap: 0.75rem; }
-  .mobile-drawer { inset: 64px 0 0 0; }
 
-  /* While the drawer is open, hide the (non-sticky) top bar so the sticky
-     header sits flush at the viewport top and the drawer's `inset` value
-     aligns with the header's bottom edge instead of cutting across it. */
+  /* `position: sticky` is unreliable on mobile once sections use transforms
+     (e.g. scroll reveals). Pin the promo bar + header to the viewport. */
+  .top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+  }
+  .site-header {
+    position: fixed;
+    top: 36px; /* matches .top-bar-inner height */
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.98);
+  }
+  .site-header.is-scrolled {
+    background: #fff;
+  }
+
+  /* Reserve space so the first paint matches the fixed chrome (top bar + header). */
+  main#main {
+    padding-top: calc(36px + 64px);
+  }
+
+  .mobile-drawer {
+    top: calc(36px + 64px);
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  /* Long firm name + hamburger: clip the word-mark instead of the button. */
+  .brand-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Drawer open: top bar is removed; header and content offset shrink. */
   body.drawer-open .top-bar { display: none; }
+  body.drawer-open .site-header { top: 0; }
+  body.drawer-open .mobile-drawer { top: 64px; }
+  body.drawer-open main#main { padding-top: 64px; }
 }
 
 /* Smaller phones — drop the brand tagline so the brand name doesn't
@@ -376,9 +427,17 @@
   .brand-name { font-size: 1.1rem; }
   .brand-tag { display: none; }
   .header-inner { height: 60px; }
-  .mobile-drawer { inset: 60px 0 0 0; padding-inline: 1.25rem; }
   .top-bar { font-size: 0.7rem; letter-spacing: 0.04em; }
   .top-bar-inner { height: 32px; gap: 0.6rem; }
+
+  .site-header { top: 32px; }
+  main#main { padding-top: calc(32px + 60px); }
+  .mobile-drawer {
+    top: calc(32px + 60px);
+    padding-inline: 1.25rem;
+  }
+  body.drawer-open .mobile-drawer { top: 60px; }
+  body.drawer-open main#main { padding-top: 60px; }
 }
 
 /* Very narrow — drop the phone number out of the top bar (still in
