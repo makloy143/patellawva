@@ -299,7 +299,8 @@
   display: flex; flex-direction: column; gap: 1rem;
   transform: translateY(-12px); opacity: 0; pointer-events: none;
   transition: transform 280ms ease, opacity 280ms ease;
-  z-index: 40;
+  /* Must overlay sticky .site-header (z-index: 50). */
+  z-index: 60;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   /* Account for browser address bars / iOS safe area. */
@@ -322,6 +323,11 @@
   .nav-toggle { display: inline-flex; }
   .header-inner { height: 64px; gap: 0.75rem; }
   .mobile-drawer { inset: 64px 0 0 0; }
+
+  /* While the drawer is open, hide the (non-sticky) top bar so the sticky
+     header sits flush at the viewport top and the drawer's `inset` value
+     aligns with the header's bottom edge instead of cutting across it. */
+  body.drawer-open .top-bar { display: none; }
 }
 
 /* Smaller phones — drop the brand tagline so the brand name doesn't
@@ -341,6 +347,11 @@
 @media (max-width: 380px) {
   .top-bar-tel { display: none; }
   .top-bar-inner { justify-content: center; }
+  .header-inner { gap: 0.5rem; }
+  .brand { gap: 0.6rem; }
+  .brand-name { font-size: 1.02rem; }
+  /* Lightly shrink the toggle so it fits comfortably alongside the brand. */
+  .nav-toggle { width: 40px; height: 40px; }
 }
 
 /* =========================================================
