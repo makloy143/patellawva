@@ -1,72 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-labelledby="ogt ogd">
+  <title id="ogt">Bhavik D. Patel, Esq. — Attorney at Law, Fairfax, VA</title>
+  <desc id="ogd">Open Graph card for the law office of Bhavik D. Patel, Esq. in Fairfax, Virginia.</desc>
+
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#07142b"/>
-      <stop offset="100%" stop-color="#122a4e"/>
+      <stop offset="0%"  stop-color="#061025"/>
+      <stop offset="55%" stop-color="#0a1b33"/>
+      <stop offset="100%" stop-color="#13294f"/>
     </linearGradient>
-    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#d5b27e"/>
-      <stop offset="100%" stop-color="#b8945f"/>
+
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#e7c891"/>
+      <stop offset="55%" stop-color="#d5b27e"/>
+      <stop offset="100%" stop-color="#a8865a"/>
     </linearGradient>
-    <radialGradient id="halo" cx="0.85" cy="0.15" r="0.7">
-      <stop offset="0%" stop-color="#b8945f" stop-opacity="0.18"/>
-      <stop offset="60%" stop-color="#b8945f" stop-opacity="0"/>
+
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%"  stop-color="#d5b27e" stop-opacity="0.14"/>
+      <stop offset="60%" stop-color="#d5b27e" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#d5b27e" stop-opacity="0"/>
     </radialGradient>
+
+    <!-- Reusable BP monogram (mirrors /favicon.svg + /logo-mark.svg) -->
+    <symbol id="bp" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="14" fill="#0a1b33"/>
+      <path d="M19 17h12.5c5 0 8.5 3 8.5 7.4 0 3.1-1.7 5.4-4.4 6.4 3.4.8 5.4 3.4 5.4 6.9 0 4.7-3.6 7.8-9 7.8H19V17Zm5.4 4.6v7.6h6.6c2.6 0 4.4-1.5 4.4-3.8 0-2.3-1.8-3.8-4.4-3.8h-6.6Zm0 12v7.6h7.4c2.8 0 4.6-1.5 4.6-3.8 0-2.3-1.8-3.8-4.6-3.8h-7.4Z" fill="url(#gold)"/>
+      <path d="M14 50h36" stroke="url(#gold)" stroke-width="1.5" stroke-linecap="round" opacity="0.85"/>
+    </symbol>
   </defs>
 
+  <!-- Background stack -->
   <rect width="1200" height="630" fill="url(#bg)"/>
   <rect width="1200" height="630" fill="url(#halo)"/>
 
-  <!-- Brand mark -->
-  <g transform="translate(96 96)">
-    <rect width="120" height="120" rx="22" fill="#0a1b33" stroke="url(#gold)" stroke-width="3"/>
-    <text x="60" y="84"
-          text-anchor="middle"
-          font-family="Cormorant Garamond, Georgia, serif"
-          font-size="78"
-          font-weight="700"
-          fill="url(#gold)">B</text>
+  <!-- Centered composition -->
+  <g transform="translate(600 0)" text-anchor="middle">
+    <!-- Monogram -->
+    <use href="#bp" x="-70" y="138" width="140" height="140"/>
+
+    <!-- Eyebrow -->
+    <text y="338"
+          font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+          font-size="20" font-weight="600" letter-spacing="6"
+          fill="url(#gold)">ATTORNEY AT LAW</text>
+
+    <!-- Firm name -->
+    <text y="412"
+          font-family="Cormorant Garamond, Georgia, 'Times New Roman', serif"
+          font-size="78" font-weight="700" letter-spacing="-0.5"
+          fill="#fbf8f3">Bhavik D. Patel, Esq.</text>
+
+    <!-- Hairline gold rule -->
+    <line x1="-60" y1="448" x2="60" y2="448" stroke="url(#gold)" stroke-width="1.5" opacity="0.85"/>
+
+    <!-- City -->
+    <text y="492"
+          font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+          font-size="24" font-weight="500" letter-spacing="0.5"
+          fill="rgba(251,248,243,0.85)">Fairfax, Virginia</text>
   </g>
 
-  <!-- Firm name -->
-  <text x="96" y="320"
-        font-family="Cormorant Garamond, Georgia, serif"
-        font-size="84"
-        font-weight="700"
-        fill="#fbf8f3">Bhavik D. Patel, Esq.</text>
-
-  <text x="96" y="378"
-        font-family="Inter, sans-serif"
-        font-size="28"
-        letter-spacing="3"
-        fill="url(#gold)">ATTORNEY AT LAW &#183; FAIRFAX, VA</text>
-
-  <!-- Tagline -->
-  <text x="96" y="464"
-        font-family="Inter, sans-serif"
-        font-size="32"
-        fill="rgba(251,248,243,0.86)">Personal Injury &#183; Criminal Defense &#183; Family Law</text>
-
-  <!-- Trust badges -->
-  <g transform="translate(96 510)" font-family="Inter, sans-serif" font-size="22" fill="rgba(251,248,243,0.78)">
-    <circle cx="10" cy="10" r="6" fill="#5ad27e"/>
-    <text x="32" y="18">Free Consultation</text>
-
-    <circle cx="290" cy="10" r="6" fill="#5ad27e"/>
-    <text x="312" y="18">Available 24/7</text>
-
-    <circle cx="540" cy="10" r="6" fill="#5ad27e"/>
-    <text x="562" y="18">No Fee Unless We Win</text>
-  </g>
-
-  <!-- Phone CTA -->
-  <g transform="translate(820 96)">
-    <rect x="-260" y="0" width="260" height="62" rx="31" fill="url(#gold)"/>
-    <text x="-130" y="40"
-          text-anchor="middle"
-          font-family="Inter, sans-serif"
-          font-size="22"
-          font-weight="700"
-          fill="#0a1b33">(703) 844-4519</text>
+  <!-- Footer: phone (left) / domain (right) -->
+  <g font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+     font-size="20" font-weight="500" letter-spacing="2"
+     fill="rgba(251,248,243,0.6)">
+    <text x="80"   y="582" text-anchor="start">(703) 844-4519</text>
+    <text x="1120" y="582" text-anchor="end">PATELLAWVA.COM</text>
   </g>
 </svg>

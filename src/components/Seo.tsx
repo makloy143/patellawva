@@ -64,6 +64,8 @@ export default function Seo(props: Props) {
     setMetaProperty('og:description', description);
     setMetaProperty('og:url', canonical);
     setMetaProperty('og:image', image);
+    setMetaProperty('og:image:secure_url', image);
+    setMetaProperty('og:image:type', ogImageType(image));
     setMetaProperty('og:image:width', String(SITE.defaultOgImageWidth));
     setMetaProperty('og:image:height', String(SITE.defaultOgImageHeight));
     setMetaProperty('og:image:alt', `${SITE.firmName}, ${SITE.firmTag}`);
@@ -118,6 +120,15 @@ function setMetaProperty(property: string, content: string) {
     },
   );
   el.content = content;
+}
+
+function ogImageType(url: string): string {
+  const lower = url.toLowerCase().split('?')[0];
+  if (lower.endsWith('.svg')) return 'image/svg+xml';
+  if (lower.endsWith('.jpg') || lower.endsWith('.jpeg')) return 'image/jpeg';
+  if (lower.endsWith('.webp')) return 'image/webp';
+  if (lower.endsWith('.gif')) return 'image/gif';
+  return SITE.defaultOgImageType ?? 'image/png';
 }
 
 function setLinkRel(rel: string, href: string) {

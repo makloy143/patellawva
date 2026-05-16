@@ -51,7 +51,10 @@ export const SITE = {
   url: SITE_URL,
 
   // Default Open Graph / Twitter image (relative to site root).
-  defaultOgImage: '/og-default.svg',
+  // PNG, not SVG — Facebook, LinkedIn, X/Twitter, iMessage, WhatsApp,
+  // Slack, Discord, etc. do not render SVG `og:image` values.
+  defaultOgImage: '/og-default.png',
+  defaultOgImageType: 'image/png',
   defaultOgImageWidth: 1200,
   defaultOgImageHeight: 630,
 
