@@ -1,8 +1,11 @@
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { existsSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
  * Tiny plugin that mirrors what every static host (Netlify, Vercel,
@@ -13,23 +16,20 @@ import { resolve } from 'node:path';
  * shell. Without this the local `vite preview` would silently mask
  * the prerendered SEO output.
  */
-function serveDirectoryIndexes() {
+function serveDirectoryIndexes(): Plugin {
   return {
     name: 'serve-prerendered-directory-indexes',
-    apply: 'serve' as const,
-    configurePreviewServer(server: { middlewares: { use: (handler: unknown) => void } }) {
+    apply: 'serve',
+    configurePreviewServer(server) {
       const distDir = resolve(__dirname, 'dist');
-      type ReqLike = { url?: string };
-      type ResLike = { setHeader: (k: string, v: string) => void };
-      server.middlewares.use((req: ReqLike, _res: ResLike, next: () => void) => {
+      server.middlewares.use((req, _res, next) => {
         if (!req.url || req.url.includes('.')) return next();
         const url = req.url.split('?')[0];
         if (url.endsWith('/')) return next();
         const candidate = resolve(distDir, url.replace(/^\/+/, ''), 'index.html');
         if (existsSync(candidate)) {
-          // Rewrite to the directory index so sirv-style static serving
-          // picks it up natively.
-          req.url = url + '/' + (req.url.includes('?') ? '?' + req.url.split('?')[1] : '');
+          const qs = req.url.includes('?') ? '?' + req.url.split('?')[1] : '';
+          req.url = url + '/' + qs;
         }
         next();
       });
