@@ -100,6 +100,25 @@ After someone enters it correctly once, unlock is persisted in `sessionStorage` 
 Duplicate [`.env.example`](.env.example) locally and fill values in; do not commit secrets.
 If the live site is built on a host that only clones Git, add **`VITE_SITE_PASSWORD`** to that pipeline’s secrets / environment variables so `npm run build` sees it.
 
+#### On your live domain (e.g. `www.patellawva.com`)
+
+The passphrase gate is **not** activated by the domain name alone. It is baked into **`dist/`** only when **`VITE_SITE_PASSWORD`** is defined **at the moment you run** `npm run build`. Whatever you upload to nginx (or any host) is what visitors get — **`https://www.patellawva.com`** shows the gate only if that deployed build was produced with the variable set.
+
+```bash
+# On the machine where you produce dist/ (your laptop or the VPS):
+
+export VITE_SITE_PASSWORD='your-passphrase-here'
+npm ci
+npm run build
+
+# Deploy the freshly built dist/ to the server — example:
+rsync -av --delete dist/ user@your-server:/var/www/patellawva/html/
+```
+
+If **`www.patellawva.com` opens straight to the public site** with no passphrase form, the usual cause is **`dist/` was built without** `VITE_SITE_PASSWORD`. Rebuild with `export …` (or a gitignored `.env`), redeploy **`dist/`** in full (including `assets/index-*.js`), then purge any CDN or browser cache.
+
+To make the live site **public** again: remove or empty `VITE_SITE_PASSWORD`, run **`npm run build`**, and redeploy **`dist/`**.
+
 ## Image store
 
 Every image used on the site is registered in
