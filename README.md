@@ -33,6 +33,7 @@ injury, criminal defense, divorce & family law, and civil litigation.
 │   ├── App.tsx              # Routes
 │   ├── index.css            # Tailwind v4 + theme + component styles
 │   ├── components/
+│   │   ├── SiteGate.tsx     # Optional passphrase screen (`VITE_SITE_PASSWORD`)
 │   │   ├── Layout.tsx       # Site shell (Header + <Outlet/> + Footer)
 │   │   ├── Header.tsx       # Top bar, brand, nav, mobile drawer
 │   │   ├── Footer.tsx       # Footer with nav, practice, contact
@@ -76,6 +77,28 @@ npm run preview    # serve the built site locally
 
 > `npm run build` runs `tsc -b && vite build` — the TypeScript compiler
 > validates types before Vite bundles, so type errors fail the build.
+
+### Temporary private preview (optional passphrase)
+
+[`SiteGate.tsx`](src/components/SiteGate.tsx) can show a fullscreen form before routes load.
+Enable it by defining **`VITE_SITE_PASSWORD`** before the build — for example:
+
+```bash
+# Preferred: `.env.local` or `.env` (gitignored template in `.gitignore`).
+echo 'VITE_SITE_PASSWORD=your-passphrase-here' > .env.local
+npm run dev        # passphrase gate applies in development too
+
+# Production bundle on your machine reads the same var at build time:
+npm run build
+```
+
+Leave the variable unset (or blank) for the usual public site. The passphrase is **inlined into
+browser JavaScript** at build time, so tech-savvy visitors can bypass it; for real secrecy use,
+for example, [nginx Basic Auth](https://nginx.org/en/docs/http/ngx_http_auth_basic_module.html).
+After someone enters it correctly once, unlock is persisted in `sessionStorage` until that tab closes.
+
+Duplicate [`.env.example`](.env.example) locally and fill values in; do not commit secrets.
+If the live site is built on a host that only clones Git, add **`VITE_SITE_PASSWORD`** to that pipeline’s secrets / environment variables so `npm run build` sees it.
 
 ## Image store
 
