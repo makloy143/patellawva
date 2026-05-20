@@ -131,7 +131,7 @@ export default function Practice() {
             <div className="split-media">
               <img
                 src={images.practice.personalInjury}
-                alt="Fairfax personal injury attorney consultation in a private law office"
+                alt="Injured client in a neck brace and arm sling consulting with an attorney in a private law office"
                 width={1200}
                 height={1500}
                 loading="lazy"
@@ -150,7 +150,7 @@ export default function Practice() {
             <div className="split-media">
               <img
                 src={images.practice.criminalDefense}
-                alt="Northern Virginia courthouse exterior — criminal defense practice area"
+                alt="Handshake over a contract agreement with scales of justice and a gavel on a desk — criminal defense practice area"
                 width={1200}
                 height={1500}
                 loading="lazy"
@@ -209,7 +209,7 @@ export default function Practice() {
             <div className="split-media">
               <img
                 src={images.practice.familyLaw}
-                alt="Private consultation between a Fairfax family law attorney and a client"
+                alt="Couple reviewing documents with a family law attorney during a private consultation"
                 width={1200}
                 height={1500}
                 loading="lazy"
@@ -228,7 +228,7 @@ export default function Practice() {
             <div className="split-media">
               <img
                 src={images.practice.civilLitigation}
-                alt="Stacked legal volumes on a wooden desk — civil litigation practice"
+                alt="Judge's gavel resting on a civil litigation law book"
                 width={1200}
                 height={1500}
                 loading="lazy"

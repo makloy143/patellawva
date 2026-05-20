@@ -29,14 +29,10 @@ export const images = {
   },
 
   practice: {
-    personalInjury:
-      'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80',
-    criminalDefense:
-      'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80',
-    familyLaw:
-      'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80',
-    civilLitigation:
-      'https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1200&q=80',
+    personalInjury: '/images/personal-injury.png',
+    criminalDefense: '/images/criminal-defense.png',
+    familyLaw: '/images/family-law.png',
+    civilLitigation: '/images/civil-litigation.png',
   },
 } as const;
 
